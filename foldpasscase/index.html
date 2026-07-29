@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カラーシミュレーター | capy-no</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CZFLJF0Y0Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CZFLJF0Y0Q');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/simulator.css">
+<style>
+  /* この商品（二つ折りパスケース）のアートワーク専用スタイル。
+     色変数の初期値と、SVGパーツ⇔色変数の対応はここに書く。 */
+  :root{
+    --main-color:#9E695F;
+    --main-suede-color:#68413D;
+    --inner-color:#B5B07D;
+    --thread-color:#C7D08B;
+    --hardware:#C9A227;
+    --main-border:#754A43;
+    --inner-border:#8F8A5D;
+  }
+  .c-main{ fill:var(--main-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-main-suede{ fill:var(--main-suede-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-inner{ fill:var(--inner-color); stroke:var(--inner-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-thread{ fill:none; stroke:var(--thread-color); stroke-dasharray:5 8; stroke-width:2px; stroke-linecap:round; transition:stroke .35s ease; }
+  .c-hardware{ fill:#fff; stroke:#c9a227; stroke-width:4px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="visually-hidden">二つ折りパスケース カラーシミュレーター</h1>
+
+  <main>
+    <div class="preview">
+      <svg viewBox="0 0 581.35 469.2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <rect class="c-main" x=".25" y="1.24" width="283.46" height="467.72" rx="8.5" ry="8.5"/>
+        <rect class="c-thread" x="9" y="9.99" width="266.46" height="450.71" rx="8.5" ry="8.5"/>
+        <circle class="c-hardware" cx="20.09" cy="235.1" r="9.92"/>
+        <image width="577" height="459" transform="translate(128.23 341.79) scale(.24)" href="assets/logo.png"/>
+        <rect class="c-main-suede" x="297.64" y=".5" width="283.46" height="467.72" rx="8.5" ry="8.5" transform="translate(878.74 468.72) rotate(180)"/>
+        <circle class="c-hardware" cx="561.26" cy="234.36" r="9.92"/>
+        <path class="c-inner" d="M297.64,269.54h283.46v189.92c0,4.69-3.81,8.5-8.5,8.5h-266.46c-4.69,0-8.5-3.81-8.5-8.5v-189.92h0Z"/>
+        <path class="c-inner" d="M297.64,297.89h283.46v161.57c0,4.69-3.81,8.5-8.5,8.5h-266.46c-4.69,0-8.5-3.81-8.5-8.5v-161.57h0Z"/>
+        <path class="c-inner" d="M306.14.25h266.46c4.69,0,8.5,3.81,8.5,8.5v189.92h-283.46V8.75c0-4.69,3.81-8.5,8.5-8.5Z"/>
+        <rect class="c-thread" x="305.89" y="9.25" width="266.46" height="450.71" rx="8.5" ry="8.5" transform="translate(878.24 469.22) rotate(180)"/>
+        <image width="47" height="70" transform="translate(518.74 433.32) rotate(-30) scale(.24)" href="assets/pawprint-small-1.png"/>
+        <image width="49" height="60" transform="translate(535.22 413.87) scale(.24)" href="assets/pawprint-small-2.png"/>
+        <rect class="c-main-suede" x="333.07" y="38.69" width="212.6" height="141.73" rx="7.09" ry="7.09"/>
+        <rect class="c-thread" x="324.32" y="30.18" width="229.61" height="158.74" rx="8.5" ry="8.5"/>
+      </svg>
+    </div>
+
+    <div class="controls" id="controls"></div>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay"></div>
+</div>
+
+<script src="../shared/simulator.js"></script>
+<script src="config.js"></script>
+<script>
+  ColorSimulator.init(SIMULATOR_CONFIG);
+</script>
+</body>
+</html>
