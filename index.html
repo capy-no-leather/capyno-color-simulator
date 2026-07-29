@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カラーシミュレーター | capy-no</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c1c1c;
+    --line:#e6e4e0;
+    --sub:#8a8a8a;
+
+    --main-color:#1E9FA4;
+    --inner-color:#9E695F;
+    --thread-color:#C7D08B;
+    --hardware:#C9A227;
+    --main-border:#16777B;
+    --inner-border:#754A43;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    height:100%;
+    margin:0;
+    overflow:hidden;
+    font-family:'Zen Maru Gothic', sans-serif;
+    color:var(--ink);
+    background:#ffffff;
+  }
+
+  .page{
+    height:100vh;
+    height:100dvh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .visually-hidden{
+    position:absolute !important;
+    width:1px; height:1px;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+    white-space:nowrap;
+  }
+
+  main{
+    flex:1 1 auto;
+    min-height:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: 10px 0 8px;
+  }
+
+  .preview{
+    flex:1 1 auto;
+    min-height:0;
+    width:95vw;
+    max-width:95vw;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .preview svg{
+    width:100%;
+    height:auto;
+    max-height:100%;
+    display:block;
+  }
+
+  .c-main{ fill:var(--main-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-inner{ fill:var(--inner-color); stroke:var(--inner-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-thread{ fill:none; stroke:var(--thread-color); stroke-dasharray:5 8; stroke-width:2px; stroke-linecap:round; transition:stroke .35s ease; }
+  .c-hardware-fill{ fill:#c9a227; }
+  .c-hardware-fill2{ fill:#c9a227; }
+  .c-hardware-bar{ fill:#c9a227; stroke:#a58756; }
+  .c-hardware-line{ fill:none; stroke:rgba(165,135,86,.5); stroke-linejoin:round; stroke-linecap:round; }
+
+  .controls{
+    flex:0 0 auto;
+    width:100%;
+    max-width:520px;
+    padding: 10px 20px 14px;
+  }
+
+  .summary{
+    display:flex;
+    gap:8px;
+    margin-bottom:10px;
+  }
+  .chip{
+    flex:1;
+    height:46px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:0 10px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    background:#fff;
+    cursor:pointer;
+  }
+  .chip.active{
+    border-color:var(--ink);
+    background:var(--ink);
+    color:#fff;
+  }
+  .chip.active .chip-label{ color:#ddd; }
+  .chip .swatch-dot{
+    width:16px;height:16px;border-radius:50%;
+    flex:0 0 auto;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+  }
+  .chip-text{ display:flex; flex-direction:column; line-height:1.25; text-align:left; min-width:0; }
+  .chip .chip-label{ font-size:9.5px; color:var(--sub); white-space:nowrap; }
+  .chip .chip-value{
+    font-size:11px;
+    font-weight:700;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .palette-row{
+    display:flex;
+    justify-content:center;
+    gap:9px;
+    margin-bottom:6px;
+  }
+  .swatch{
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    position:relative;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+  }
+  .swatch:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+  .swatch.selected{
+    box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--ink);
+  }
+
+  .foot-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .active-label{
+    font-size:10.5px;
+    color:var(--sub);
+  }
+  .note{
+    font-size:9.5px;
+    color:var(--sub);
+  }
+
+  .back-btn{
+    width:100%;
+    margin-top:8px;
+    padding:12px 0;
+    border:none;
+    border-radius:10px;
+    background:var(--ink);
+    color:#fff;
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-size:13.5px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .back-btn:active{ opacity:.85; }
+
+  .modal-overlay{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(28,28,28,.55);
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    z-index:50;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal-card{
+    width:100%;
+    max-width:340px;
+    background:#fff;
+    border-radius:16px;
+    padding:26px 22px 22px;
+    text-align:center;
+  }
+  .modal-title{
+    font-size:15px;
+    font-weight:700;
+    margin:0 0 16px;
+  }
+  .modal-colors{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .modal-color-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    text-align:left;
+  }
+  .modal-color-row .dot{
+    width:26px; height:26px;
+    border-radius:50%;
+    flex:0 0 auto;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+  }
+  .modal-color-row .label{
+    font-size:10.5px;
+    color:var(--sub);
+    display:block;
+  }
+  .modal-color-row .value{
+    font-size:14px;
+    font-weight:700;
+    display:block;
+  }
+  .modal-note{
+    font-size:12px;
+    color:var(--sub);
+    line-height:1.7;
+    margin:0 0 20px;
+  }
+  .modal-ok{
+    width:100%;
+    padding:13px 0;
+    border:none;
+    border-radius:10px;
+    background:var(--ink);
+    color:#fff;
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .modal-ok:active{ opacity:.85; }
+
+  .modal-cancel{
+    display:block;
+    width:100%;
+    margin-top:12px;
+    padding:4px 0;
+    border:none;
+    background:none;
+    color:var(--sub);
+    font-family:'Zen Maru Gothic', sans-serif;
+    font-size:12px;
+    text-decoration:underline;
+    cursor:pointer;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="visually-hidden">システム手帳 カラーシミュレーター</h1>
+
+  <main>
+    <div class="preview">
+      <svg viewBox="0 0 992.38 1187.09" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <path class="c-main" d="M14.3.12h926.93c28.16,0,51.02,22.86,51.02,51.02v479.06c0,28.16-22.86,51.02-51.02,51.02H14.3c-7.82,0-14.17-6.35-14.17-14.17V14.3C.12,6.48,6.48.12,14.3.12Z"/>
+        <path class="c-inner" d="M14.3.12h240.94v581.1H14.3c-7.82,0-14.17-6.35-14.17-14.17V14.3C.12,6.48,6.48.12,14.3.12Z"/>
+        <rect class="c-inner" x="482.01" y=".12" width="255.12" height="581.1"/>
+        <rect class="c-inner" x="297.76" y="14.3" width="141.73" height="552.76" rx="28.35" ry="28.35"/>
+        <path class="c-inner" d="M893.04.12h48.19c28.16,0,51.02,22.86,51.02,51.02v479.06c0,28.16-22.86,51.02-51.02,51.02h-48.19V.12h0Z"/>
+        <rect class="c-hardware-fill" x="347.37" y="28.47" width="42.52" height="524.41" rx="5.67" ry="5.67"/>
+        <ellipse class="c-hardware-line" cx="368.63" cy="70.99" rx="12.76" ry="13.13"/>
+        <circle class="c-hardware-line" cx="368.63" cy="510.36" r="12.76"/>
+        <rect class="c-inner" x="737.13" y="99.34" width="70.87" height="70.87"/>
+        <path class="c-thread" d="M22.8,8.63h909.92c28.16,0,51.02,22.86,51.02,51.02v462.05c0,28.16-22.86,51.02-51.02,51.02H22.8c-7.82,0-14.17-6.35-14.17-14.17V22.8c0-7.82,6.35-14.17,14.17-14.17Z"/>
+        <line class="c-thread" x1="728.63" y1="28.47" x2="728.63" y2="552.88"/>
+        <ellipse class="c-hardware-fill2" cx="949.73" cy="70.99" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="949.73" cy="510.36" rx="16.51" ry="17"/>
+        <rect class="c-hardware-bar" x="341.7" y="211.87" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="341.7" y="357.01" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="341.7" y="410.87" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="341.7" y="104.16" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="341.7" y="158.01" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="341.7" y="464.72" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <path class="c-main" d="M14.3,605.86h926.93c28.16,0,51.02,22.86,51.02,51.02v479.06c0,28.16-22.86,51.02-51.02,51.02H14.3c-7.82,0-14.17-6.35-14.17-14.17v-552.76c0-7.82,6.35-14.17,14.17-14.17Z" transform="translate(992.38 1792.83) rotate(180)"/>
+        <path class="c-thread" d="M22.8,614.37h909.92c28.16,0,51.02,22.86,51.02,51.02v462.05c0,28.16-22.86,51.02-51.02,51.02H22.8c-7.82,0-14.17-6.35-14.17-14.17v-535.75c0-7.82,6.35-14.17,14.17-14.17Z" transform="translate(992.38 1792.83) rotate(180)"/>
+        <line class="c-thread" x1="263.75" y1="634.21" x2="263.75" y2="1158.62"/>
+        <ellipse class="c-hardware-fill2" cx="42.64" cy="676.73" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="42.64" cy="1116.1" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="935.68" cy="676.73" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="935.68" cy="1116.1" rx="16.51" ry="17"/>
+        <circle class="c-hardware-fill2" cx="623.75" cy="676.73" r="12.76"/>
+        <circle class="c-hardware-fill2" cx="627.51" cy="1116.1" r="12.76"/>
+        <image width="289" height="245" transform="translate(92.88 471.28) scale(.24)"href="assets/logo-large.png"/>
+        <image width="638" height="346" transform="translate(320.29 1018.89) scale(.24)"href="assets/logo-medium.png"/>
+        <image width="47" height="70" transform="translate(751.87 1087.28) rotate(-30) scale(.24)"href="assets/pawprint-small-1.png"/>
+        <image width="49" height="60" transform="translate(768.34 1067.82) scale(.24)"href="assets/pawprint-small-2.png"/>
+        <image width="214" height="308" transform="translate(662.97 456.16) scale(.24)"href="assets/logo-corner.png"/>
+      </svg>
+    </div>
+
+    <div class="controls">
+      <div class="summary">
+        <button class="chip active" data-target="main">
+          <span class="swatch-dot" style="background:var(--main-color)"></span>
+          <span class="chip-text"><span class="chip-label">メイン</span><span class="chip-value" id="label-main">ターコイズ</span></span>
+        </button>
+        <button class="chip" data-target="inner">
+          <span class="swatch-dot" style="background:var(--inner-color)"></span>
+          <span class="chip-text"><span class="chip-label">内側</span><span class="chip-value" id="label-inner">ダークブラウン</span></span>
+        </button>
+        <button class="chip" data-target="thread">
+          <span class="swatch-dot" style="background:var(--thread-color)"></span>
+          <span class="chip-text"><span class="chip-label">ステッチ</span><span class="chip-value" id="label-thread">グリーン</span></span>
+        </button>
+      </div>
+
+      <div class="palette-row" id="palette-grid"></div>
+
+      <div class="foot-row">
+        <span class="active-label" id="active-label">メインカラーを選択中</span>
+      </div>
+
+      <button class="back-btn" id="back-btn">
+        <span>商品ページへ戻る</span>
+      </button>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-card">
+      <p class="modal-title">選んだ配色はこちらです</p>
+      <div class="modal-colors" id="modal-colors"></div>
+      <p class="modal-note">商品ページの「オプション」欄で、<br>ご希望のカラーを設定してから<br>ご注文をお願いいたします。</p>
+      <button class="modal-ok" id="modal-ok">OK</button>
+      <button class="modal-cancel" id="modal-cancel">シミュレーションに戻る</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const MAIN_INNER_COLORS = [
+    { code: "1", name: "ピンク",       hex: "#FF9BAD", border: "#D96F86" },
+    { code: "2", name: "イエロー",     hex: "#FFB231", border: "#D98C18" },
+    { code: "3", name: "グリーン",     hex: "#B5B07D", border: "#8F8A5D" },
+    { code: "4", name: "ターコイズ",   hex: "#1E9FA4", border: "#16777B" },
+    { code: "5", name: "ブルー",       hex: "#48769D", border: "#365A78" },
+    { code: "6", name: "ブラック",     hex: "#2C2F35", border: "#191B1F" },
+    { code: "7", name: "ブラウン",     hex: "#DFA272", border: "#B97A4E" },
+    { code: "8", name: "ダークブラウン", hex: "#9E695F", border: "#754A43" }
+  ];
+
+  const STITCH_COLORS = [
+    { code: "a", name: "ピンク",       hex: "#FFCCD7" },
+    { code: "b", name: "イエロー",     hex: "#FEBE0A" },
+    { code: "c", name: "グリーン",     hex: "#C7D08B" },
+    { code: "d", name: "ターコイズ",   hex: "#028284" },
+    { code: "e", name: "ブルー",       hex: "#25549B" },
+    { code: "f", name: "ブラック",     hex: "#000000" },
+    { code: "g", name: "ブラウン",     hex: "#E4AE7E" },
+    { code: "h", name: "ダークブラウン", hex: "#67423B" }
+  ];
+
+  const COLOR_SETS = { main: MAIN_INNER_COLORS, inner: MAIN_INNER_COLORS, thread: STITCH_COLORS };
+
+  const state = { main: "ターコイズ", inner: "ダークブラウン", thread: "グリーン" };
+  const targetLabels = { main: "メインカラー", inner: "内側カラー", thread: "ステッチカラー" };
+  let activeTarget = "main";
+
+  const root = document.documentElement;
+  const grid = document.getElementById("palette-grid");
+  const activeLabelEl = document.getElementById("active-label");
+
+  function findColor(target, name){ return COLOR_SETS[target].find(c => c.name === name); }
+
+  function applyColor(target, colorName){
+    const c = findColor(target, colorName);
+    state[target] = colorName;
+    root.style.setProperty(`--${target}-color`, c.hex);
+    if (c.border) {
+      root.style.setProperty(`--${target}-border`, c.border);
+    }
+    document.getElementById(`label-${target}`).textContent = c.name;
+    document.querySelector(`.chip[data-target="${target}"] .swatch-dot`).style.background = c.hex;
+  }
+
+  function renderPalette(){
+    grid.innerHTML = "";
+    COLOR_SETS[activeTarget].forEach(c => {
+      const btn = document.createElement("button");
+      btn.className = "swatch";
+      btn.style.background = c.hex;
+      btn.title = c.name;
+      btn.setAttribute("aria-label", c.name);
+      if (c.name === state[activeTarget]) btn.classList.add("selected");
+      btn.addEventListener("click", () => {
+        applyColor(activeTarget, c.name);
+        renderPalette();
+      });
+      grid.appendChild(btn);
+    });
+  }
+
+  function setActiveTarget(target){
+    activeTarget = target;
+    document.querySelectorAll(".chip").forEach(el => {
+      el.classList.toggle("active", el.dataset.target === target);
+    });
+    activeLabelEl.textContent = `${targetLabels[target]}を選択中`;
+    renderPalette();
+  }
+
+  document.querySelectorAll(".chip").forEach(chip => {
+    chip.addEventListener("click", () => setActiveTarget(chip.dataset.target));
+  });
+
+  const targetOrder = ["main", "inner", "thread"];
+  const modalOverlay = document.getElementById("modal-overlay");
+  const modalColors = document.getElementById("modal-colors");
+
+  function openConfirmModal(){
+    modalColors.innerHTML = "";
+    targetOrder.forEach(t => {
+      const c = findColor(t, state[t]);
+      const row = document.createElement("div");
+      row.className = "modal-color-row";
+      row.innerHTML = `
+        <span class="dot" style="background:${c.hex}"></span>
+        <span>
+          <span class="label">${targetLabels[t]}</span>
+          <span class="value">${c.code}.${c.name}</span>
+        </span>`;
+      modalColors.appendChild(row);
+    });
+    modalOverlay.classList.add("open");
+  }
+
+  document.getElementById("back-btn").addEventListener("click", openConfirmModal);
+
+  // 商品ページの固定URL（referrerが取得できない場合の最終手段）。
+  const PRODUCT_PAGE_URL = "https://capyno.official.ec/items/127831158";
+
+  function isSafeHttpUrl(url){
+    try {
+      const u = new URL(url, window.location.href);
+      return u.protocol === "http:" || u.protocol === "https:";
+    } catch {
+      return false;
+    }
+  }
+
+  function resolveBackUrl(){
+    // 1. リンクに付与された ?back=<商品ページURL> を優先
+    //    （商品説明欄に貼るリンクをこの形式にすることで、referrerが
+    //    ブラウザ設定等でブロックされても確実に商品ページへ戻せる）
+    const paramBack = new URLSearchParams(window.location.search).get("back");
+    if (paramBack && isSafeHttpUrl(paramBack)) return paramBack;
+
+    // 2. document.referrer（同一タブでBASE商品ページから遷移してきた場合）
+    if (document.referrer && isSafeHttpUrl(document.referrer)) return document.referrer;
+
+    // 3. 固定の商品ページURL
+    if (PRODUCT_PAGE_URL && isSafeHttpUrl(PRODUCT_PAGE_URL)) return PRODUCT_PAGE_URL;
+
+    return null;
+  }
+
+  document.getElementById("modal-ok").addEventListener("click", () => {
+    const backUrl = resolveBackUrl();
+    if (backUrl) {
+      window.location.href = backUrl;
+    } else {
+      window.history.back();
+    }
+  });
+
+  document.getElementById("modal-cancel").addEventListener("click", () => {
+    modalOverlay.classList.remove("open");
+  });
+
+  renderPalette();
+</script>
+</body>
+</html>
