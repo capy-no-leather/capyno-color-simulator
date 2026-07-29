@@ -21,6 +21,7 @@
     --sub:#8a8a8a;
 
     --main-color:#1E9FA4;
+    --main-suede-color:#168F98;
     --inner-color:#9E695F;
     --thread-color:#C7D08B;
     --hardware:#C9A227;
@@ -78,6 +79,7 @@
   }
 
   .c-main{ fill:var(--main-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-main-suede{ fill:var(--main-suede-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
   .c-inner{ fill:var(--inner-color); stroke:var(--inner-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
   .c-thread{ fill:none; stroke:var(--thread-color); stroke-dasharray:5 8; stroke-width:2px; stroke-linecap:round; transition:stroke .35s ease; }
   .c-hardware-fill{ fill:#c9a227; }
@@ -276,7 +278,7 @@
   <main>
     <div class="preview">
       <svg viewBox="0 0 992.38 1187.09" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-        <path class="c-main" d="M14.3.12h926.93c28.16,0,51.02,22.86,51.02,51.02v479.06c0,28.16-22.86,51.02-51.02,51.02H14.3c-7.82,0-14.17-6.35-14.17-14.17V14.3C.12,6.48,6.48.12,14.3.12Z"/>
+        <path class="c-main-suede" d="M14.3.12h926.93c28.16,0,51.02,22.86,51.02,51.02v479.06c0,28.16-22.86,51.02-51.02,51.02H14.3c-7.82,0-14.17-6.35-14.17-14.17V14.3C.12,6.48,6.48.12,14.3.12Z"/>
         <path class="c-inner" d="M14.3.12h240.94v581.1H14.3c-7.82,0-14.17-6.35-14.17-14.17V14.3C.12,6.48,6.48.12,14.3.12Z"/>
         <rect class="c-inner" x="482.01" y=".12" width="255.12" height="581.1"/>
         <rect class="c-inner" x="297.76" y="14.3" width="141.73" height="552.76" rx="28.35" ry="28.35"/>
@@ -353,14 +355,14 @@
 
 <script>
   const MAIN_INNER_COLORS = [
-    { code: "1", name: "ピンク",       hex: "#FF9BAD", border: "#D96F86" },
-    { code: "2", name: "イエロー",     hex: "#FFB231", border: "#D98C18" },
-    { code: "3", name: "グリーン",     hex: "#B5B07D", border: "#8F8A5D" },
-    { code: "4", name: "ターコイズ",   hex: "#1E9FA4", border: "#16777B" },
-    { code: "5", name: "ブルー",       hex: "#48769D", border: "#365A78" },
-    { code: "6", name: "ブラック",     hex: "#2C2F35", border: "#191B1F" },
-    { code: "7", name: "ブラウン",     hex: "#DFA272", border: "#B97A4E" },
-    { code: "8", name: "ダークブラウン", hex: "#9E695F", border: "#754A43" }
+    { code: "1", name: "ピンク",       hex: "#FF9BAD", border: "#D96F86", suede: "#E8787D" },
+    { code: "2", name: "イエロー",     hex: "#FFB231", border: "#D98C18", suede: "#EFA13A" },
+    { code: "3", name: "グリーン",     hex: "#B5B07D", border: "#8F8A5D", suede: "#9C9168" },
+    { code: "4", name: "ターコイズ",   hex: "#1E9FA4", border: "#16777B", suede: "#168F98" },
+    { code: "5", name: "ブルー",       hex: "#48769D", border: "#365A78", suede: "#527994" },
+    { code: "6", name: "ブラック",     hex: "#2C2F35", border: "#191B1F", suede: "#35383D" },
+    { code: "7", name: "ブラウン",     hex: "#DFA272", border: "#B97A4E", suede: "#C77C4A" },
+    { code: "8", name: "ダークブラウン", hex: "#9E695F", border: "#754A43", suede: "#68413D" }
   ];
 
   const STITCH_COLORS = [
@@ -392,6 +394,9 @@
     root.style.setProperty(`--${target}-color`, c.hex);
     if (c.border) {
       root.style.setProperty(`--${target}-border`, c.border);
+    }
+    if (target === "main" && c.suede) {
+      root.style.setProperty("--main-suede-color", c.suede);
     }
     document.getElementById(`label-${target}`).textContent = c.name;
     document.querySelector(`.chip[data-target="${target}"] .swatch-dot`).style.background = c.hex;
