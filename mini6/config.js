@@ -14,7 +14,7 @@ const SIMULATOR_CONFIG = {
       fullLabel: "メインカラー",
       cssVar: "--main-color",
       borderCssVar: "--main-border",
-      initial: "ターコイズ",
+      initial: "ダークブラウン",
       colors: [
         { code: "1", name: "ピンク",         hex: "#FF9BAD", border: "#D96F86", linked: { "--main-suede-color": "#E8787D" } },
         { code: "2", name: "イエロー",       hex: "#FFB231", border: "#D98C18", linked: { "--main-suede-color": "#EFA13A" } },
@@ -32,7 +32,7 @@ const SIMULATOR_CONFIG = {
       fullLabel: "内側カラー",
       cssVar: "--inner-color",
       borderCssVar: "--inner-border",
-      initial: "ダークブラウン",
+      initial: "ブラウン",
       colors: [
         { code: "1", name: "ピンク",         hex: "#FF9BAD", border: "#D96F86" },
         { code: "2", name: "イエロー",       hex: "#FFB231", border: "#D98C18" },
@@ -49,7 +49,7 @@ const SIMULATOR_CONFIG = {
       chipLabel: "ステッチ",
       fullLabel: "ステッチカラー",
       cssVar: "--thread-color",
-      initial: "グリーン",
+      initial: "ブラウン",
       colors: [
         { code: "a", name: "ピンク",         hex: "#FFCCD7" },
         { code: "b", name: "イエロー",       hex: "#FEBE0A" },
