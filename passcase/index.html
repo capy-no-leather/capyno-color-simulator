@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カラーシミュレーター | capy-no</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CZFLJF0Y0Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CZFLJF0Y0Q');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/simulator.css">
+<style>
+  /* この商品（パスケース）のアートワーク専用スタイル。
+     色変数の初期値と、SVGパーツ⇔色変数の対応はここに書く。
+     ステッチカラーは独立選択させず、メインカラーの linked から
+     --thread-color に自動で流し込まれる。 */
+  :root{
+    --main-color:#FF9BAD;
+    --main-border:#D96F86;
+    --base-color:#48769D;
+    --base-border:#365A78;
+    --thread-color:#FFCCD7;
+  }
+  .c-main{ fill:var(--main-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-base{ fill:var(--base-color); stroke:var(--base-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-thread{ fill:none; stroke:var(--thread-color); stroke-dasharray:5 8; stroke-width:2px; stroke-linecap:round; transition:stroke .35s ease; }
+  .c-hardware{ fill:#fff; stroke:#c9a227; stroke-width:4px; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="visually-hidden">パスケース カラーシミュレーター</h1>
+
+  <main>
+    <div class="preview">
+      <svg viewBox="0 0 312.31 516.24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <rect class="c-base" x=".25" y=".25" width="311.81" height="198.43" rx="14.17" ry="14.17"/>
+        <circle class="c-hardware" cx="21.68" cy="20.68" r="9.92"/>
+        <path class="c-main" d="M42.77.25h255.12c7.82,0,14.17,6.35,14.17,14.17v170.08c0,7.82-6.35,14.17-14.17,14.17H42.77V.25h0Z"/>
+        <rect class="c-thread" x="8.75" y="8.75" width="294.8" height="181.42" rx="14.17" ry="14.17" transform="translate(312.31 198.93) rotate(180)"/>
+        <rect class="c-base" x=".25" y="260.88" width="311.81" height="198.43" rx="14.17" ry="14.17" transform="translate(516.24 203.93) rotate(90)"/>
+        <circle class="c-hardware" cx="77.37" cy="225.61" r="9.92"/>
+        <rect class="c-thread" x="8.75" y="269.38" width="294.8" height="181.42" rx="14.17" ry="14.17" transform="translate(-203.93 516.24) rotate(-90)"/>
+        <image width="523" height="258" transform="translate(97.83 392.02) scale(.24)" href="assets/logo.png"/>
+      </svg>
+    </div>
+
+    <div class="controls" id="controls"></div>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay"></div>
+</div>
+
+<script src="../shared/simulator.js"></script>
+<script src="config.js"></script>
+<script>
+  ColorSimulator.init(SIMULATOR_CONFIG);
+</script>
+</body>
+</html>
