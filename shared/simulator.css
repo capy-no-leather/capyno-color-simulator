@@ -1,0 +1,246 @@
+/* capy-no カラーシミュレーター 共通スタイル
+   商品ごとに変わるのは以下のみ（各商品の index.html 内 <style> に書く）:
+   - :root の色変数の初期値（--main-color 等）
+   - アートワーク（SVG）の各パーツを色変数に結びつけるクラス（.c-main など）
+   ここには商品に依存しない画面構成・UIコンポーネントのスタイルのみを置く。
+*/
+:root{
+  --ink:#1c1c1c;
+  --line:#e6e4e0;
+  --sub:#8a8a8a;
+}
+*{box-sizing:border-box;}
+html,body{
+  height:100%;
+  margin:0;
+  overflow:hidden;
+  font-family:'Zen Maru Gothic', sans-serif;
+  color:var(--ink);
+  background:#ffffff;
+}
+
+.page{
+  height:100vh;
+  height:100dvh;
+  display:flex;
+  flex-direction:column;
+}
+
+.visually-hidden{
+  position:absolute !important;
+  width:1px; height:1px;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  white-space:nowrap;
+}
+
+main{
+  flex:1 1 auto;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  padding: 10px 0 8px;
+}
+
+.preview{
+  flex:1 1 auto;
+  min-height:0;
+  width:95vw;
+  max-width:95vw;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.preview svg{
+  width:100%;
+  height:auto;
+  max-height:100%;
+  display:block;
+}
+
+.controls{
+  flex:0 0 auto;
+  width:100%;
+  max-width:520px;
+  padding: 10px 20px 14px;
+}
+
+.summary{
+  display:flex;
+  gap:8px;
+  margin-bottom:10px;
+}
+.chip{
+  flex:1;
+  height:46px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:0 10px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+}
+.chip.active{
+  border-color:var(--ink);
+  background:var(--ink);
+  color:#fff;
+}
+.chip.active .chip-label{ color:#ddd; }
+.chip .swatch-dot{
+  width:16px;height:16px;border-radius:50%;
+  flex:0 0 auto;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+}
+.chip-text{ display:flex; flex-direction:column; line-height:1.25; text-align:left; min-width:0; }
+.chip .chip-label{ font-size:9.5px; color:var(--sub); white-space:nowrap; }
+.chip .chip-value{
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.palette-row{
+  display:flex;
+  justify-content:center;
+  gap:9px;
+  margin-bottom:6px;
+}
+.swatch{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  border:none;
+  cursor:pointer;
+  position:relative;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+}
+.swatch:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; }
+.swatch.selected{
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--ink);
+}
+
+.foot-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.active-label{
+  font-size:10.5px;
+  color:var(--sub);
+}
+.disclaimer{
+  margin:6px 0 0;
+  font-size:9.5px;
+  line-height:1.5;
+  color:var(--sub);
+  text-align:center;
+}
+
+.back-btn{
+  width:100%;
+  margin-top:8px;
+  padding:12px 0;
+  border:none;
+  border-radius:10px;
+  background:var(--ink);
+  color:#fff;
+  font-family:'Zen Maru Gothic', sans-serif;
+  font-size:13.5px;
+  font-weight:700;
+  cursor:pointer;
+}
+.back-btn:active{ opacity:.85; }
+
+.modal-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(28,28,28,.55);
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  z-index:50;
+}
+.modal-overlay.open{ display:flex; }
+.modal-card{
+  width:100%;
+  max-width:340px;
+  background:#fff;
+  border-radius:16px;
+  padding:26px 22px 22px;
+  text-align:center;
+}
+.modal-title{
+  font-size:15px;
+  font-weight:700;
+  margin:0 0 16px;
+}
+.modal-colors{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:16px;
+}
+.modal-color-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  text-align:left;
+}
+.modal-color-row .dot{
+  width:26px; height:26px;
+  border-radius:50%;
+  flex:0 0 auto;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+}
+.modal-color-row .label{
+  font-size:10.5px;
+  color:var(--sub);
+  display:block;
+}
+.modal-color-row .value{
+  font-size:14px;
+  font-weight:700;
+  display:block;
+}
+.modal-note{
+  font-size:12px;
+  color:var(--sub);
+  line-height:1.7;
+  margin:0 0 20px;
+}
+.modal-ok{
+  width:100%;
+  padding:13px 0;
+  border:none;
+  border-radius:10px;
+  background:var(--ink);
+  color:#fff;
+  font-family:'Zen Maru Gothic', sans-serif;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+.modal-ok:active{ opacity:.85; }
+
+.modal-cancel{
+  display:block;
+  width:100%;
+  margin-top:12px;
+  padding:4px 0;
+  border:none;
+  background:none;
+  color:var(--sub);
+  font-family:'Zen Maru Gothic', sans-serif;
+  font-size:12px;
+  text-decoration:underline;
+  cursor:pointer;
+}
