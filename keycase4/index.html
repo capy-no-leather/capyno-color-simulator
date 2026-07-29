@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カラーシミュレーター | capy-no</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CZFLJF0Y0Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CZFLJF0Y0Q');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/simulator.css">
+<style>
+  /* この商品（4連キーケース）のアートワーク専用スタイル。
+     色変数の初期値と、SVGパーツ⇔色変数の対応はここに書く。 */
+  :root{
+    --main-color:#9E695F;
+    --main-suede-color:#68413D;
+    --inner-color:#FF9BAD;
+    --thread-color:#FFCCD7;
+    --hardware:#C9A227;
+    --main-border:#754A43;
+    --inner-border:#D96F86;
+  }
+  .c-main{ fill:var(--main-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-main-suede{ fill:var(--main-suede-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-inner{ fill:var(--inner-color); stroke:var(--inner-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-thread{ fill:none; stroke:var(--thread-color); stroke-dasharray:5 8; stroke-width:2px; stroke-linecap:round; transition:stroke .35s ease; }
+  .c-hardware{ fill:#c9a227; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="visually-hidden">4連キーケース カラーシミュレーター</h1>
+
+  <main>
+    <div class="preview">
+      <svg viewBox="0 0 496.56 611.05" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <path class="c-main" d="M14.42,313.17h445.04c20.34,0,36.85,16.51,36.85,36.85v223.94c0,20.34-16.51,36.85-36.85,36.85H14.42c-7.82,0-14.17-6.35-14.17-14.17v-269.29c0-7.82,6.35-14.17,14.17-14.17Z" transform="translate(496.56 923.97) rotate(180)"/>
+        <path class="c-main-suede" d="M14.42.25h445.04c20.34,0,36.85,16.51,36.85,36.85v223.94c0,20.34-16.51,36.85-36.85,36.85H14.42c-7.82,0-14.17-6.35-14.17-14.17V14.42C.25,6.6,6.6.25,14.42.25Z"/>
+        <rect class="c-inner" x="176" y=".25" width="141.73" height="297.64"/>
+        <path class="c-hardware" d="M201.51,9.75h90.71v51.02c0,3.13-2.54,5.67-5.67,5.67h-79.37c-3.13,0-5.67-2.54-5.67-5.67V9.75h0Z"/>
+        <path class="c-inner" d="M14.42.25h99.21v297.64H14.42c-7.82,0-14.17-6.35-14.17-14.17V14.42C.25,6.6,6.6.25,14.42.25Z"/>
+        <path class="c-inner" d="M382.93.25h76.54c20.34,0,36.85,16.51,36.85,36.85v223.94c0,20.34-16.51,36.85-36.85,36.85h-76.54V.25h0Z"/>
+        <path class="c-thread" d="M23.05,8.88h430.87c18.77,0,34.02,15.24,34.02,34.02v212.6c0,18.77-15.24,34.02-34.02,34.02H23.05c-7.82,0-14.17-6.35-14.17-14.17V23.05c0-7.82,6.35-14.17,14.17-14.17Z"/>
+        <ellipse class="c-hardware" cx="462.3" cy="149.07" rx="16.51" ry="17"/>
+        <image width="289" height="245" transform="translate(204.34 197.45) scale(.29)" href="assets/logo-large.png"/>
+        <image width="638" height="346" transform="translate(281.72 385.55) rotate(90) scale(.24)" href="assets/logo-medium.png"/>
+        <image width="47" height="70" transform="translate(425.45 569.72) rotate(-30) scale(.26)" href="assets/pawprint-small-1.png"/>
+        <image width="49" height="60" transform="translate(442.51 551.29) scale(.24)" href="assets/pawprint-small-2.png"/>
+        <path class="c-thread" d="M22.8,321.79h430.87c18.77,0,34.02,15.24,34.02,34.02v212.6c0,18.77-15.24,34.02-34.02,34.02H22.8c-7.82,0-14.17-6.35-14.17-14.17v-252.28c0-7.82,6.35-14.17,14.17-14.17Z" transform="translate(496.31 924.22) rotate(180)"/>
+        <ellipse class="c-hardware" cx="34.27" cy="461.98" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware" cx="453.79" cy="462.11" rx="16.51" ry="17"/>
+      </svg>
+    </div>
+
+    <div class="controls" id="controls"></div>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay"></div>
+</div>
+
+<script src="../shared/simulator.js"></script>
+<script src="config.js"></script>
+<script>
+  ColorSimulator.init(SIMULATOR_CONFIG);
+</script>
+</body>
+</html>
