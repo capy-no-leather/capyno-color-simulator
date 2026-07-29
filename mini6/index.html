@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カラーシミュレーター | capy-no</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CZFLJF0Y0Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CZFLJF0Y0Q');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/simulator.css">
+<style>
+  /* この商品（ミニ6サイズ）のアートワーク専用スタイル。
+     色変数の初期値と、SVGパーツ⇔色変数の対応はここに書く。 */
+  :root{
+    --main-color:#1E9FA4;
+    --main-suede-color:#168F98;
+    --inner-color:#9E695F;
+    --thread-color:#C7D08B;
+    --hardware:#C9A227;
+    --main-border:#16777B;
+    --inner-border:#754A43;
+  }
+  .c-main{ fill:var(--main-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-main-suede{ fill:var(--main-suede-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-inner{ fill:var(--inner-color); stroke:var(--inner-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-thread{ fill:none; stroke:var(--thread-color); stroke-dasharray:5 8; stroke-width:2px; stroke-linecap:round; transition:stroke .35s ease; }
+  .c-hardware-fill{ fill:#c9a227; }
+  .c-hardware-fill2{ fill:#c9a227; }
+  .c-hardware-bar{ fill:#c9a227; stroke:#a58756; }
+  .c-hardware-line{ fill:none; stroke:rgba(165,135,86,.5); stroke-linejoin:round; stroke-linecap:round; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="visually-hidden">システム手帳（ミニ6サイズ） カラーシミュレーター</h1>
+
+  <main>
+    <div class="preview">
+      <svg viewBox="0 0 992.38 1187.09" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <path class="c-main" d="M14.3,475.89h841.89c28.16,0,51.02,22.86,51.02,51.02v351.5c0,28.16-22.86,51.02-51.02,51.02H14.3c-7.82,0-14.17-6.35-14.17-14.17v-425.2c0-7.82,6.35-14.17,14.17-14.17Z" transform="translate(907.34 1405.33) rotate(180)"/>
+        <path class="c-thread" d="M22.8,484.4h824.88c28.16,0,51.02,22.86,51.02,51.02v334.49c0,28.16-22.86,51.02-51.02,51.02H22.8c-7.82,0-14.17-6.35-14.17-14.17v-408.19c0-7.82,6.35-14.17,14.17-14.17Z" transform="translate(907.34 1405.33) rotate(180)"/>
+        <line class="c-thread" x1="278.05" y1="504.24" x2="278.05" y2="901.09"/>
+        <ellipse class="c-hardware-fill2" cx="42.77" cy="532.46" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="42.77" cy="872.62" rx="16.51" ry="17"/>
+        <path class="c-main-suede" d="M14.3.12h841.89c28.16,0,51.02,22.86,51.02,51.02v351.5c0,28.16-22.86,51.02-51.02,51.02H14.3c-7.82,0-14.17-6.35-14.17-14.17V14.3C.12,6.48,6.48.12,14.3.12Z"/>
+        <path class="c-inner" d="M14.3.13h198.43v453.54H14.3c-7.82,0-14.17-6.35-14.17-14.17V14.3C.12,6.48,6.48.13,14.3.13Z"/>
+        <rect class="c-inner" x="425.2" y=".12" width="212.6" height="453.54"/>
+        <rect class="c-inner" x="255.12" y="14.3" width="113.39" height="425.2" rx="28.35" ry="28.35"/>
+        <path class="c-inner" d="M807.87.12h48.19c28.16,0,51.02,22.86,51.02,51.02v351.5c0,28.16-22.86,51.02-51.02,51.02h-48.19V.12h0Z"/>
+        <rect class="c-hardware-fill" x="290.55" y="28.47" width="42.52" height="396.85" rx="5.67" ry="5.67"/>
+        <ellipse class="c-hardware-line" cx="311.81" cy="70.99" rx="12.76" ry="13.13"/>
+        <circle class="c-hardware-line" cx="311.81" cy="382.68" r="12.76"/>
+        <rect class="c-inner" x="637.8" y="85.04" width="70.87" height="70.87"/>
+        <path class="c-thread" d="M22.8,8.63h824.88c28.16,0,51.02,22.86,51.02,51.02v334.49c0,28.16-22.86,51.02-51.02,51.02H22.8c-7.82,0-14.17-6.35-14.17-14.17V22.8c0-7.82,6.35-14.17,14.17-14.17Z"/>
+        <line class="c-thread" x1="629.29" y1="28.47" x2="629.29" y2="425.32"/>
+        <ellipse class="c-hardware-fill2" cx="864.57" cy="56.69" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="864.57" cy="396.85" rx="16.51" ry="17"/>
+        <rect class="c-hardware-bar" x="284.88" y="198.05" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="284.88" y="251.91" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="284.88" y="305.76" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="284.88" y="90.33" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="284.88" y="144.19" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="284.88" y="359.62" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <ellipse class="c-hardware-fill2" cx="850.39" cy="532.46" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="850.39" cy="872.62" rx="16.51" ry="17"/>
+        <image width="289" height="245" transform="translate(62.36 338.93) scale(.29)" href="assets/logo-large.png"/>
+        <image width="638" height="346" transform="translate(308.93 782.53) scale(.24)" href="assets/logo-medium.png"/>
+        <image width="47" height="70" transform="translate(708.66 844.02) rotate(-30) scale(.24)" href="assets/pawprint-small-1.png"/>
+        <image width="49" height="60" transform="translate(725.14 824.57) scale(.24)" href="assets/pawprint-small-2.png"/>
+        <image width="214" height="308" transform="translate(559.63 337.1) scale(.24)" href="assets/logo-corner.png"/>
+        <circle class="c-hardware-fill2" cx="595.53" cy="546.76" r="12.76"/>
+        <circle class="c-hardware-fill2" cx="595.53" cy="858.44" r="12.76"/>
+      </svg>
+    </div>
+
+    <div class="controls" id="controls"></div>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay"></div>
+</div>
+
+<script src="../shared/simulator.js"></script>
+<script src="config.js"></script>
+<script>
+  ColorSimulator.init(SIMULATOR_CONFIG);
+</script>
+</body>
+</html>
