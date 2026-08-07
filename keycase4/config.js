@@ -17,12 +17,12 @@ const SIMULATOR_CONFIG = {
       initial: "ダークブラウン",
       colors: [
         { code: "1", name: "ピンク",         hex: "#FF9BAD", border: "#D96F86", linked: { "--main-suede-color": "#E8787D" } },
-        { code: "2", name: "イエロー",       hex: "#FFB231", border: "#D98C18", linked: { "--main-suede-color": "#EFA13A" } },
+        { code: "2", name: "イエロー",       hex: "#F8BA33", border: "#D98C18", linked: { "--main-suede-color": "#EFA13A" } },
         { code: "3", name: "グリーン",       hex: "#B5B07D", border: "#8F8A5D", linked: { "--main-suede-color": "#9C9168" } },
         { code: "4", name: "ターコイズ",     hex: "#1E9FA4", border: "#16777B", linked: { "--main-suede-color": "#168F98" } },
         { code: "5", name: "ブルー",         hex: "#48769D", border: "#365A78", linked: { "--main-suede-color": "#527994" } },
         { code: "6", name: "ブラック",       hex: "#2C2F35", border: "#191B1F", linked: { "--main-suede-color": "#35383D" } },
-        { code: "7", name: "ブラウン",       hex: "#DFA272", border: "#B97A4E", linked: { "--main-suede-color": "#C77C4A" } },
+        { code: "7", name: "ブラウン",       hex: "#DFA272", border: "#B97A4E", linked: { "--main-suede-color": "#E59456" } },
         { code: "8", name: "ダークブラウン", hex: "#9E695F", border: "#754A43", linked: { "--main-suede-color": "#68413D" } }
       ]
     },
@@ -35,7 +35,7 @@ const SIMULATOR_CONFIG = {
       initial: "ピンク",
       colors: [
         { code: "1", name: "ピンク",         hex: "#FF9BAD", border: "#D96F86" },
-        { code: "2", name: "イエロー",       hex: "#FFB231", border: "#D98C18" },
+        { code: "2", name: "イエロー",       hex: "#F8BA33", border: "#D98C18" },
         { code: "3", name: "グリーン",       hex: "#B5B07D", border: "#8F8A5D" },
         { code: "4", name: "ターコイズ",     hex: "#1E9FA4", border: "#16777B" },
         { code: "5", name: "ブルー",         hex: "#48769D", border: "#365A78" },
@@ -52,12 +52,12 @@ const SIMULATOR_CONFIG = {
       initial: "ピンク",
       colors: [
         { code: "a", name: "ピンク",         hex: "#FFCCD7" },
-        { code: "b", name: "イエロー",       hex: "#FEBE0A" },
+        { code: "b", name: "イエロー",       hex: "#FFB231" },
         { code: "c", name: "グリーン",       hex: "#C7D08B" },
         { code: "d", name: "ターコイズ",     hex: "#028284" },
         { code: "e", name: "ブルー",         hex: "#25549B" },
         { code: "f", name: "ブラック",       hex: "#000000" },
-        { code: "g", name: "ブラウン",       hex: "#E4AE7E" },
+        { code: "g", name: "ブラウン",       hex: "#C6967C" },
         { code: "h", name: "ダークブラウン", hex: "#67423B" }
       ]
     }

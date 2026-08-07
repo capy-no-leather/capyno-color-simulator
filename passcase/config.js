@@ -19,12 +19,12 @@ const SIMULATOR_CONFIG = {
       initial: "ピンク",
       colors: [
         { code: "1", name: "ピンク",         hex: "#FF9BAD", border: "#D96F86", linked: { "--thread-color": "#FFCCD7" } },
-        { code: "2", name: "イエロー",       hex: "#FFB231", border: "#D98C18", linked: { "--thread-color": "#FEBE0A" } },
+        { code: "2", name: "イエロー",       hex: "#F8BA33", border: "#D98C18", linked: { "--thread-color": "#FFB231" } },
         { code: "3", name: "グリーン",       hex: "#B5B07D", border: "#8F8A5D", linked: { "--thread-color": "#C7D08B" } },
         { code: "4", name: "ターコイズ",     hex: "#1E9FA4", border: "#16777B", linked: { "--thread-color": "#028284" } },
         { code: "5", name: "ブルー",         hex: "#48769D", border: "#365A78", linked: { "--thread-color": "#25549B" } },
         { code: "6", name: "ブラック",       hex: "#2C2F35", border: "#191B1F", linked: { "--thread-color": "#000000" } },
-        { code: "7", name: "ブラウン",       hex: "#DFA272", border: "#B97A4E", linked: { "--thread-color": "#E4AE7E" } },
+        { code: "7", name: "ブラウン",       hex: "#DFA272", border: "#B97A4E", linked: { "--thread-color": "#C6967C" } },
         { code: "8", name: "ダークブラウン", hex: "#9E695F", border: "#754A43", linked: { "--thread-color": "#67423B" } }
       ]
     },
@@ -37,7 +37,7 @@ const SIMULATOR_CONFIG = {
       initial: "ブルー",
       colors: [
         { code: "1", name: "ピンク",         hex: "#FF9BAD", border: "#D96F86" },
-        { code: "2", name: "イエロー",       hex: "#FFB231", border: "#D98C18" },
+        { code: "2", name: "イエロー",       hex: "#F8BA33", border: "#D98C18" },
         { code: "3", name: "グリーン",       hex: "#B5B07D", border: "#8F8A5D" },
         { code: "4", name: "ターコイズ",     hex: "#1E9FA4", border: "#16777B" },
         { code: "5", name: "ブルー",         hex: "#48769D", border: "#365A78" },
