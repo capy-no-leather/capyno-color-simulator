@@ -32,13 +32,27 @@
   }
 
   function renderModalShell(config, container) {
+    // comingSoonMessage が設定されている商品（商品ページ未公開）は、
+    // OKボタン押下時に遷移する代わりに準備中メッセージを表示する。
+    // 同じモーダル内に2つのビューを用意し、非破壊的に表示を切り替える
+    // （innerHTMLを丸ごと差し替えるとイベントリスナーが失われるため）。
+    const comingSoonHtml = config.comingSoonMessage ? `
+      <div class="modal-view modal-view-comingsoon" hidden>
+        <p class="modal-title">${escapeHtml(config.comingSoonTitle || "販売開始まで今しばらくお待ちください")}</p>
+        <p class="modal-note">${config.comingSoonMessage}</p>
+        <button class="modal-ok" id="modal-comingsoon-close">閉じる</button>
+      </div>` : "";
+
     container.innerHTML = `
       <div class="modal-card">
-        <p class="modal-title">${escapeHtml(config.modalTitle || "選んだ配色はこちらです")}</p>
-        <div class="modal-colors" id="modal-colors"></div>
-        <p class="modal-note">${config.modalNote || ""}</p>
-        <button class="modal-ok" id="modal-ok">OK</button>
-        <button class="modal-cancel" id="modal-cancel">${escapeHtml(config.modalCancelLabel || "シミュレーションに戻る")}</button>
+        <div class="modal-view modal-view-confirm">
+          <p class="modal-title">${escapeHtml(config.modalTitle || "選んだ配色はこちらです")}</p>
+          <div class="modal-colors" id="modal-colors"></div>
+          <p class="modal-note">${config.modalNote || ""}</p>
+          <button class="modal-ok" id="modal-ok">OK</button>
+          <button class="modal-cancel" id="modal-cancel">${escapeHtml(config.modalCancelLabel || "シミュレーションに戻る")}</button>
+        </div>
+        ${comingSoonHtml}
       </div>
     `;
   }
@@ -157,7 +171,15 @@
 
     document.getElementById("back-btn").addEventListener("click", openConfirmModal);
 
+    const confirmViewEl = modalOverlayEl.querySelector(".modal-view-confirm");
+    const comingSoonViewEl = modalOverlayEl.querySelector(".modal-view-comingsoon");
+
     document.getElementById("modal-ok").addEventListener("click", () => {
+      if (config.comingSoonMessage) {
+        confirmViewEl.hidden = true;
+        comingSoonViewEl.hidden = false;
+        return;
+      }
       const backUrl = resolveBackUrl(config.productPageUrl);
       if (backUrl) {
         window.location.href = backUrl;
@@ -169,6 +191,16 @@
     document.getElementById("modal-cancel").addEventListener("click", () => {
       modalOverlayEl.classList.remove("open");
     });
+
+    const comingSoonCloseBtn = document.getElementById("modal-comingsoon-close");
+    if (comingSoonCloseBtn) {
+      comingSoonCloseBtn.addEventListener("click", () => {
+        modalOverlayEl.classList.remove("open");
+        // 次回開いたときは通常の確認ビューに戻す
+        comingSoonViewEl.hidden = true;
+        confirmViewEl.hidden = false;
+      });
+    }
 
     // 初期カラーを反映（アートワークのCSS初期値とconfigの初期値を一致させる）
     config.targets.forEach(t => applyColor(t.key, t.initial));

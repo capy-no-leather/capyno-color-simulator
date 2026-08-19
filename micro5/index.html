@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カラーシミュレーター | capy-no</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CZFLJF0Y0Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-CZFLJF0Y0Q');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/simulator.css">
+<style>
+  /* この商品（マイクロ5サイズ）のアートワーク専用スタイル。
+     色変数の初期値と、SVGパーツ⇔色変数の対応はここに書く。 */
+  :root{
+    --main-color:#48769D;
+    --main-suede-color:#527994;
+    --inner-color:#FF9BAD;
+    --thread-color:#FFCCD7;
+    --hardware:#C9A227;
+    --main-border:#365A78;
+    --inner-border:#D96F86;
+  }
+  .c-main{ fill:var(--main-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-main-suede{ fill:var(--main-suede-color); stroke:var(--main-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-inner{ fill:var(--inner-color); stroke:var(--inner-border); stroke-miterlimit:10; stroke-width:.5px; transition:fill .35s ease, stroke .35s ease; }
+  .c-thread{ fill:none; stroke:var(--thread-color); stroke-dasharray:5 8; stroke-width:2px; stroke-linecap:round; transition:stroke .35s ease; }
+  .c-hardware-fill{ fill:#c9a227; }
+  .c-hardware-fill2{ fill:#c9a227; }
+  .c-hardware-fill3{ fill:#c9a227; stroke:rgba(165,135,86,.5); stroke-linejoin:round; stroke-linecap:round; }
+  .c-hardware-bar{ fill:#c9a227; stroke:#a58756; }
+  .c-hardware-line{ fill:none; stroke:rgba(165,135,86,.5); stroke-linejoin:round; stroke-linecap:round; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1 class="visually-hidden">システム手帳（マイクロ5サイズ） カラーシミュレーター</h1>
+
+  <main>
+    <div class="preview">
+      <svg viewBox="0 0 737.51 785.45" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <path class="c-main" d="M14.42,402.52h671.81c28.16,0,51.02,22.86,51.02,51.02v280.63c0,28.16-22.86,51.02-51.02,51.02H14.42c-7.82,0-14.17-6.35-14.17-14.17v-354.33c0-7.82,6.35-14.17,14.17-14.17Z" transform="translate(737.51 1187.72) rotate(180)"/>
+        <path class="c-main-suede" d="M14.42.25h671.81c28.16,0,51.02,22.86,51.02,51.02v280.63c0,28.16-22.86,51.02-51.02,51.02H14.42c-7.82,0-14.17-6.35-14.17-14.17V14.42C.25,6.6,6.6.25,14.42.25Z"/>
+        <path class="c-inner" d="M14.42.25h155.91v382.68H14.42c-7.82,0-14.17-6.35-14.17-14.17V14.42C.25,6.6,6.6.25,14.42.25Z"/>
+        <rect class="c-inner" x="340.16" y=".25" width="170.08" height="382.68"/>
+        <rect class="c-inner" x="198.43" y="14.42" width="113.39" height="354.33" rx="28.35" ry="28.35"/>
+        <path class="c-inner" d="M651.97.25h34.02c28.16,0,51.02,22.86,51.02,51.02v280.63c0,28.16-22.86,51.02-51.02,51.02h-34.02V.25h0Z"/>
+        <rect class="c-hardware-fill" x="233.86" y="21.26" width="42.52" height="340.16" rx="5.67" ry="5.67"/>
+        <ellipse class="c-hardware-line" cx="255.12" cy="62.36" rx="12.76" ry="13.13"/>
+        <circle class="c-hardware-line" cx="255.12" cy="320.31" r="12.76"/>
+        <rect class="c-inner" x="510.24" y="70.87" width="70.87" height="70.87"/>
+        <path class="c-thread" d="M22.93,8.75h654.8c28.16,0,51.02,22.86,51.02,51.02v263.62c0,28.16-22.86,51.02-51.02,51.02H22.93c-7.82,0-14.17-6.35-14.17-14.17V22.93c0-7.82,6.35-14.17,14.17-14.17Z"/>
+        <line class="c-thread" x1="501.73" y1="28.6" x2="501.73" y2="368.75"/>
+        <ellipse class="c-hardware-fill2" cx="694.49" cy="48.19" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="694.49" cy="334.49" rx="16.51" ry="17"/>
+        <rect class="c-hardware-bar" x="228.19" y="187.97" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="228.19" y="234.74" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="228.19" y="281.51" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="228.19" y="94.43" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <rect class="c-hardware-bar" x="228.19" y="141.2" width="53.86" height="6.24" rx="3.12" ry="3.12"/>
+        <ellipse class="c-hardware-fill2" cx="677.97" cy="450.46" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="677.97" cy="736.76" rx="16.51" ry="17"/>
+        <image width="289" height="245" transform="translate(42.52 282.24) scale(.29)" href="assets/logo-large.png"/>
+        <image width="47" height="70" transform="translate(581.21 728.13) rotate(-30) scale(.24)" href="assets/pawprint-small-1.png"/>
+        <image width="49" height="60" transform="translate(597.69 708.67) scale(.24)" href="assets/pawprint-small-2.png"/>
+        <image width="214" height="308" transform="translate(439.03 280.41) scale(.24)" href="assets/logo-corner.png"/>
+        <ellipse class="c-hardware-fill3" cx="482.39" cy="464.63" rx="12.76" ry="13.13"/>
+        <circle class="c-hardware-fill3" cx="482.39" cy="722.58" r="12.76"/>
+        <path class="c-thread" d="M22.93,411.02h654.8c28.16,0,51.02,22.86,51.02,51.02v263.62c0,28.16-22.86,51.02-51.02,51.02H22.93c-7.82,0-14.17-6.35-14.17-14.17v-337.32c0-7.82,6.35-14.17,14.17-14.17Z" transform="translate(737.51 1187.72) rotate(180)"/>
+        <line class="c-thread" x1="235.78" y1="430.87" x2="235.78" y2="771.02"/>
+        <ellipse class="c-hardware-fill2" cx="43.02" cy="450.46" rx="16.51" ry="17"/>
+        <ellipse class="c-hardware-fill2" cx="43.02" cy="736.76" rx="16.51" ry="17"/>
+        <image width="577" height="459" transform="translate(255.54 632.52) scale(.24)" href="assets/logo-medium.png"/>
+      </svg>
+    </div>
+
+    <div class="controls" id="controls"></div>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay"></div>
+</div>
+
+<script src="../shared/simulator.js"></script>
+<script src="config.js"></script>
+<script>
+  ColorSimulator.init(SIMULATOR_CONFIG);
+</script>
+</body>
+</html>
