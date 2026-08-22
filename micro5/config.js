@@ -1,12 +1,8 @@
 /* システム手帳（マイクロ5サイズ）用の設定
    カラーコードは他の手帳サイズと共通。
-   商品ページが公開されるまでは comingSoonMessage を設定し、
-   「商品ページへ戻る」確認モーダルのOKボタンで遷移の代わりに
-   準備中メッセージを表示する（productPageUrl は空のままでよい）。
 */
 const SIMULATOR_CONFIG = {
-  productPageUrl: "",
-  comingSoonMessage: "マイクロ5サイズは現在準備中です。<br>8/22(土)20:00～<br>販売スタートします。",
+  productPageUrl: "https://capyno.official.ec/items/155037989",
 
   disclaimer: "※表示される色はイメージです。<br>実際の革は、色合いや表情に個体差があります。<br>また、端末によって色味が異なる場合があります。",
   modalNote: "商品ページの「オプション」欄で、<br>ご希望のカラーを設定してから<br>ご注文をお願いいたします。",
